@@ -1,0 +1,14 @@
+﻿Key Splunk Query Used        
+
+1. index=windows | stats count by Id
+      2. index=windows | stats count by Machinename
+      3. index=windows | stats count AS Attempts by Username | sort -Attempts | head 5
+      4. index=windows Id=4625 Source_IP=”-” | stats count AS Attempts_Without_IP by Source_IP
+      5. index= windows Id=4625 Source_IP=”-” | stats count AS User_With_No_IP by Username
+      6. index= windows Id=4625 Source_IP!=”-” | stats count AS Attempts by Source_IP | sort -Attempts | head 5
+      7. index= windows Id=4625 Source_IP!=”-” | stats dc(Source_IP) AS Unique_IP
+      8. index= windows Id=4625 | stats dc(Username) AS Unique_User_Name
+      9. index=windows
+| stats min(time) as (Start_Time), max(_time) as (End_Time)    
+| eval Start_Time)=strftime(Start_Time, “%Y-%m-%d
+%H:%M:%S”), End_Time)=strftime(End_Time, “%Y-%m-%d %H:%M:%S”)
